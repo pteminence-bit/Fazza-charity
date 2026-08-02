@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aura of Hope - Charitable Foundation</title>
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
         :root {
             --bg-color: #0b0b0b;
@@ -136,8 +138,10 @@
 
         .hero {
             text-align: center;
-            padding: 6rem 1rem;
+            padding: 4rem 1rem 6rem 1rem;
             background: radial-gradient(circle at center, #1f1b0c 0%, var(--bg-color) 70%);
+            border-radius: 8px;
+            margin-bottom: 2rem;
         }
 
         .hero h1 {
@@ -162,8 +166,8 @@
             display: flex;
             justify-content: space-around;
             background-color: var(--surface-color);
-            border-top: 1px solid var(--surface-border);
-            border-bottom: 1px solid var(--surface-border);
+            border: 1px solid var(--surface-border);
+            border-radius: 8px;
             padding: 2.5rem 1rem;
             margin: 4rem 0;
             text-align: center;
@@ -182,6 +186,16 @@
             letter-spacing: 1px;
         }
 
+        .vision-section {
+            max-width: 800px;
+            margin: 4rem auto 0 auto;
+            text-align: center;
+            padding: 2.5rem;
+            background-color: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            border-radius: 8px;
+        }
+
         footer {
             background-color: var(--surface-color);
             border-top: 1px solid var(--surface-border);
@@ -194,6 +208,7 @@
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
             .stats-banner { flex-direction: column; gap: 2rem; }
+            nav a { margin-left: 1rem; }
         }
     </style>
 </head>
@@ -209,14 +224,14 @@
     </header>
 
     <main>
-        <section class="page">
-            <div class="hero">
+        <div class="page">
+            <section class="hero">
                 <h1>Lighting Lives With <span>Compassion</span></h1>
                 <p>Join our global mission to eradicate extreme hardship, provide sustainable education, and deliver immediate humanitarian aid where it matters most.</p>
                 <a href="donate.html" class="btn">Make a Donation</a>
-            </div>
+            </section>
 
-            <div class="stats-banner">
+            <section class="stats-banner">
                 <div class="stat-item">
                     <h3>$4.2M+</h3>
                     <p>Funds Raised</p>
@@ -229,34 +244,36 @@
                     <h3>65,000+</h3>
                     <p>Lives Impacted</p>
                 </div>
-            </div>
+            </section>
 
-            <h2 style="text-align: center; margin-bottom: 1rem; color: var(--gold);">Our Core Initiatives</h2>
-            <div class="grid-3">
-                <div class="card">
-                    <img src="https://lh3.googleusercontent.com/d/1LnIkjUq12ePDkRdXTFrDB2OWF560Z6cA=w1000?authuser=0" alt="Homeless Arabian child in need">
-                    <h3 style="color: var(--gold); margin-bottom: 1rem;">Global Education</h3>
-                    <p style="color: var(--text-muted);">Building modern learning centers and provisioning digital tools for underprivileged youth globally.</p>
+            <section>
+                <h2 style="text-align: center; margin-bottom: 1rem; color: var(--gold); font-size: 2.2rem;">Our Core Initiatives</h2>
+                <div class="grid-3">
+                    <div class="card">
+                        <img src="https://lh3.googleusercontent.com/d/1LnIkjUq12ePDkRdXTFrDB2OWF560Z6cA=w1000?authuser=0" alt="Child in need of education support">
+                        <h3 style="color: var(--gold); margin-bottom: 1rem;">Global Education</h3>
+                        <p style="color: var(--text-muted);">Building modern learning centers and provisioning digital tools for underprivileged youth globally.</p>
+                    </div>
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=600&q=80" alt="Children in need of support">
+                        <h3 style="color: var(--gold); margin-bottom: 1rem;">Clean Water Access</h3>
+                        <p style="color: var(--text-muted);">Installing deep water purification wells in rural drought-stricken territories.</p>
+                    </div>
+                    <div class="card">
+                        <img src="https://lh3.googleusercontent.com/d/1kvWEGDANRVDkpO_43qkMeHZl664ueWDC=w1000?authuser=0" alt="Child requiring medical relief">
+                        <h3 style="color: var(--gold); margin-bottom: 1rem;">Medical Relief</h3>
+                        <p style="color: var(--text-muted);">Deploying mobile medical clinics and essential pharmaceuticals directly to isolated regional sectors to deliver life-saving healthcare and routine treatments.</p>
+                    </div>
                 </div>
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=600&q=80" alt="Children in need of support">
-                    <h3 style="color: var(--gold); margin-bottom: 1rem;">Clean Water Access</h3>
-                    <p style="color: var(--text-muted);">Installing deep water purification wells in rural drought-stricken territories.</p>
-                </div>
-                <div class="card">
-                    <img src="https://lh3.googleusercontent.com/d/1kvWEGDANRVDkpO_43qkMeHZl664ueWDC=w1000?authuser=0" alt="Sick Arabian child requiring medical relief">
-                    <h3 style="color: var(--gold); margin-bottom: 1rem;">Medical Relief</h3>
-                    <p style="color: var(--text-muted);">Deploying mobile medical clinics and essential pharmaceuticals directly to isolated regional sectors to deliver life-saving healthcare, routine immunizations, and urgent pediatric treatments to children in hard-to-reach communities.</p>
-                </div>
-            </div>
+            </section>
 
-            <div style="max-width: 800px; margin: 4rem auto 0 auto; text-align: center; padding: 2rem; background-color: var(--surface-color); border: 1px solid var(--surface-border); border-radius: 8px;">
+            <section class="vision-section">
                 <h3 style="color: var(--gold); margin-bottom: 1rem; font-size: 1.8rem;">A Vision Rooted in Empathy and Action</h3>
                 <p style="color: var(--text-muted); line-height: 1.8; font-size: 1.05rem;">
                     At Aura of Hope, our core initiatives serve as the vital lifelines connecting generosity with the bright futures children deserve. By strategically focusing on child education, clean water access, and pediatric medical relief, we target the foundational pillars necessary to protect vulnerable kids from chronic hardship. Every learning center built, every safe water well installed, and every mobile clinic deployed represents a tangible step toward giving children a safer, healthier world. Together, fueled by unwavering compassion and driven by transparent stewardship, we bridge the gap between despair and lasting opportunity—ensuring no child is left behind in the pursuit of dignity, joy, and a brighter future.
                 </p>
-            </div>
-        </section>
+            </section>
+        </div>
     </main>
 
     <footer>
