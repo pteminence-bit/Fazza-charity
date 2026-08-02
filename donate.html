@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate - Aura of Hope</title>
+    <style>
+        :root {
+            --bg-color: #0b0b0b;
+            --surface-color: #141414;
+            --surface-border: #262626;
+            --gold: #d4af37;
+            --gold-light: #f3e5ab;
+            --gold-dark: #aa820a;
+            --text-main: #f5f5f5;
+            --text-muted: #a3a3a3;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(11, 11, 11, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--surface-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--gold);
+        }
+
+        main {
+            padding-top: 80px;
+            min-height: calc(100vh - 140px);
+        }
+
+        .page {
+            padding: 4rem 5%;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: #000;
+            font-weight: 600;
+            padding: 0.9rem 2.2rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--surface-border);
+            color: var(--text-main);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(212, 175, 55, 0.05);
+            box-shadow: none;
+        }
+
+        /* Remove arrow keys/spinners from number inputs */
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.9rem;
+            background: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            color: var(--text-main);
+            border-radius: 4px;
+            font-size: 1rem;
+            margin-bottom: 1.2rem;
+            transition: var(--transition);
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .card:hover {
+            border-color: var(--gold);
+        }
+
+        .amount-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .amount-btn {
+            background: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            color: var(--text-main);
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .amount-btn.selected, .amount-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .method-card {
+            background: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            padding: 1.5rem;
+            text-align: center;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .method-card.selected, .method-card:hover {
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .notice-box {
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid var(--gold);
+            border-radius: 6px;
+            padding: 1rem 1.2rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.92rem;
+            color: var(--gold-light);
+            display: none;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        footer {
+            background-color: var(--surface-color);
+            border-top: 1px solid var(--surface-border);
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .amount-options { grid-template-columns: repeat(2, 1fr); }
+            .payment-methods { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">AURA OF HOPE</a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="donate.html" class="active">Donate</a>
+            <a href="credits.html">Credits</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page">
+            <div style="max-width: 600px; margin: 0 auto;">
+                <h2 style="color: var(--gold); margin-bottom: 0.5rem; text-align: center;">Support Our Cause</h2>
+                <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Select donation amount, currency, and preferred payment method.</p>
+
+                <!-- STEP 1: Main Donation Form -->
+                <div id="step-main" class="card">
+                    <label for="currency-select">Select Currency</label>
+                    <select id="currency-select" onchange="setCurrency(this)">
+                        <option value="USD" selected>USD ($)</option>
+                        <option value="GBP">GBP (£)</option>
+                        <option value="EUR">EUR (€)</option>
+                    </select>
+
+                    <label>Choose Amount (<span class="curr-sym">$</span>)</label>
+                    <div class="amount-options">
+                        <button class="amount-btn selected" onclick="setPresetAmount(200, this)"><span class="curr-sym">$</span>200</button>
+                        <button class="amount-btn" onclick="setPresetAmount(300, this)"><span class="curr-sym">$</span>300</button>
+                        <button class="amount-btn" onclick="setPresetAmount(500, this)"><span class="curr-sym">$</span>500</button>
+                        <button class="amount-btn" onclick="setPresetAmount(1000, this)"><span class="curr-sym">$</span>1000</button>
+                        <button class="amount-btn" onclick="setPresetAmount(2000, this)"><span class="curr-sym">$</span>2000</button>
+                        <button class="amount-btn" onclick="showCustomPage()">Custom</button>
+                    </div>
+
+                    <!-- Notice for donations >= 2000 -->
+                    <div id="large-donation-notice" class="notice-box">
+                        <strong>Thank you for your extraordinary generosity!</strong> For donations of <span class="curr-sym">$</span>2000 or above, our VIP donor team will issue an official tax-deductible acknowledgment receipt.
+                    </div>
+
+                    <label style="margin-top: 1rem;">Select Payment Method</label>
+                    <div class="payment-methods">
+                        <div class="method-card selected" onclick="setMethod('Gift Card', this)">Gift Card</div>
+                        <div class="method-card" onclick="setMethod('Crypto', this)">Crypto</div>
+                    </div>
+
+                    <button class="btn" style="width: 100%; margin-top: 1rem;" onclick="processSelection()">Proceed</button>
+                </div>
+
+                <!-- STEP 2: Custom Amount Selection Page -->
+                <div id="step-custom" class="card hidden">
+                    <h3 style="color: var(--gold); margin-bottom: 1rem;">Custom Donation Amount</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+                        Minimum donation is <span class="curr-sym">$</span>60.
+                    </p>
+
+                    <label for="custom-input">Enter Amount (<span class="curr-sym">$</span>)</label>
+                    <input type="number" id="custom-input" placeholder="Min 60" min="60" oninput="handleCustomInput(this)">
+
+                    <!-- Notice inside custom step if amount >= 2000 -->
+                    <div id="custom-large-notice" class="notice-box">
+                        <strong>Thank you for your extraordinary generosity!</strong> For donations of <span class="curr-sym">$</span>2000 or above, our VIP donor team will issue an official tax-deductible acknowledgment receipt.
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button class="btn btn-secondary" style="flex: 1;" onclick="backToMain()">Back</button>
+                        <button class="btn" style="flex: 1;" onclick="submitCustomAmount()">Continue</button>
+                    </div>
+                </div>
+
+                <!-- STEP 3: Commitment Inquiry (For amounts < 200) -->
+                <div id="step-commitment-check" class="card hidden">
+                    <h3 style="color: var(--gold); margin-bottom: 1rem;">Recurring Commitment</h3>
+                    <p style="color: var(--text-main); margin-bottom: 1.5rem;">
+                        Would you be willing to commit to this recurring donation (<span class="curr-sym">$</span><span id="commit-amt-display"></span>) on a <strong>weekly</strong> or <strong>monthly</strong> basis?
+                    </p>
+
+                    <div style="display: flex; gap: 1rem;">
+                        <button class="btn btn-secondary" style="flex: 1;" onclick="handleCommitmentChoice(false)">No, One-Time Only</button>
+                        <button class="btn" style="flex: 1;" onclick="handleCommitmentChoice(true)">Yes, I Commit</button>
+                    </div>
+                </div>
+
+                <!-- STEP 4: Commitment Form & Instructions -->
+                <div id="step-commitment-form" class="card hidden">
+                    <h3 style="color: var(--gold); margin-bottom: 0.5rem;">Commitment Instructions</h3>
+                    <div class="notice-box" style="display: block; margin-bottom: 1.5rem;">
+                        Please complete the form below to register your recurring commitment. Once submitted, email your details directly to 
+                        <a href="mailto:auraofhopefoundation@hotmail.com" style="color: var(--gold); font-weight: bold;">auraofhopefoundation@hotmail.com</a> 
+                        so our team can confirm your scheduled support.
+                    </div>
+
+                    <form onsubmit="submitCommitmentForm(event)">
+                        <label for="commit-name">Full Name</label>
+                        <input type="text" id="commit-name" required placeholder="John Doe">
+
+                        <label for="commit-email">Email Address</label>
+                        <input type="email" id="commit-email" required placeholder="john@example.com">
+
+                        <label for="commit-frequency">Frequency</label>
+                        <select id="commit-frequency">
+                            <option value="Weekly">Weekly</option>
+                            <option value="Monthly" selected>Monthly</option>
+                        </select>
+
+                        <label for="commit-amount">Pledged Amount (<span class="curr-sym">$</span>)</label>
+                        <input type="number" id="commit-amount" readonly>
+
+                        <button type="submit" class="btn" style="width: 100%; margin-top: 1rem;">Submit Commitment</button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Aura of Hope Foundation. Dedicated to global child preservation.</p>
+    </footer>
+
+    <script>
+        let currentAmount = 200;
+        let currentCurrency = 'USD';
+        let currencySymbol = '$';
+        let currentMethod = 'Gift Card';
+        let isCustom = false;
+
+        function setCurrency(select) {
+            currentCurrency = select.value;
+            if (currentCurrency === 'USD') currencySymbol = '$';
+            else if (currentCurrency === 'GBP') currencySymbol = '£';
+            else if (currentCurrency === 'EUR') currencySymbol = '€';
+
+            document.querySelectorAll('.curr-sym').forEach(s => s.innerText = currencySymbol);
+        }
+
+        function setPresetAmount(amount, element) {
+            isCustom = false;
+            currentAmount = amount;
+            document.querySelectorAll('.amount-btn').forEach(btn => btn.classList.remove('selected'));
+            element.classList.add('selected');
+
+            toggleLargeNotice(amount, 'large-donation-notice');
+        }
+
+        function showCustomPage() {
+            isCustom = true;
+            document.getElementById('step-main').classList.add('hidden');
+            document.getElementById('step-custom').classList.remove('hidden');
+        }
+
+        function backToMain() {
+            document.getElementById('step-custom').classList.add('hidden');
+            document.getElementById('step-main').classList.remove('hidden');
+        }
+
+        function handleCustomInput(input) {
+            const val = parseFloat(input.value);
+            toggleLargeNotice(val, 'custom-large-notice');
+        }
+
+        function toggleLargeNotice(amount, elementId) {
+            const noticeBox = document.getElementById(elementId);
+            if (amount >= 2000) {
+                noticeBox.style.display = 'block';
+            } else {
+                noticeBox.style.display = 'none';
+            }
+        }
+
+        function submitCustomAmount() {
+            const input = document.getElementById('custom-input');
+            const val = parseFloat(input.value);
+
+            if (isNaN(val) || val < 60) {
+                alert(`Minimum custom donation is ${currencySymbol}60.`);
+                return;
+            }
+
+            currentAmount = val;
+            processSelection();
+        }
+
+        function setMethod(method, element) {
+            currentMethod = method;
+            document.querySelectorAll('.payment-methods .method-card').forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        function processSelection() {
+            if (currentAmount < 60) {
+                alert(`The minimum donation amount is ${currencySymbol}60.`);
+                return;
+            }
+
+            // If donation is under 200, prompt commitment check
+            if (currentAmount < 200) {
+                document.getElementById('step-main').classList.add('hidden');
+                document.getElementById('step-custom').classList.add('hidden');
+                document.getElementById('commit-amt-display').innerText = currentAmount;
+                document.getElementById('step-commitment-check').classList.remove('hidden');
+            } else {
+                proceedToPayment();
+            }
+        }
+
+        function handleCommitmentChoice(wantsToCommit) {
+            if (wantsToCommit) {
+                document.getElementById('step-commitment-check').classList.add('hidden');
+                document.getElementById('commit-amount').value = currentAmount;
+                document.getElementById('step-commitment-form').classList.remove('hidden');
+            } else {
+                proceedToPayment();
+            }
+        }
+
+        function submitCommitmentForm(e) {
+            e.preventDefault();
+            const name = document.getElementById('commit-name').value;
+            const email = document.getElementById('commit-email').value;
+            const freq = document.getElementById('commit-frequency').value;
+
+            alert(`Thank you, ${name}! Your ${freq.toLowerCase()} commitment of ${currencySymbol}${currentAmount} has been recorded. Please check your email client to send details to auraofhopefoundation@hotmail.com.`);
+            
+            // Mailto link fallback trigger
+            window.location.href = `mailto:auraofhopefoundation@hotmail.com?subject=Donation Commitment - ${encodeURIComponent(name)}&body=Name: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0AFrequency: ${encodeURIComponent(freq)}%0AAmount: ${currencySymbol}${currentAmount} ${currentCurrency}`;
+        }
+
+        function proceedToPayment() {
+            window.location.href = `checkout.html?amount=${currentAmount}&currency=${currentCurrency}&symbol=${encodeURIComponent(currencySymbol)}&method=${encodeURIComponent(currentMethod)}`;
+        }
+    </script>
+</body>
+</html>
